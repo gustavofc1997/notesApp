@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="send_note">Enviar</string>
+    <string name="type_message">Escribe el mensaje</string>
+    <string name="save">Guardar</string>
+
+</resources>

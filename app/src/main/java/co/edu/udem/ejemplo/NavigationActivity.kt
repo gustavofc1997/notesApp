@@ -25,7 +25,21 @@ class NavigationActivity : AppCompatActivity() {
 
     private fun createNote() {
         val intent = Intent(this, EditActivity::class.java)
-        startActivity(intent)
+        startActivityForResult(intent, 1)
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.myNavHostFragment)
+        if (navHostFragment != null) {
+            for (fragment in navHostFragment.getChildFragmentManager().fragments) {
+                if (fragment is NotesFragment) {
+                    fragment.showNotes()
+                } else if (fragment is RemindersFragment) {
+
+                }
+            }
+        }
+    }
 }

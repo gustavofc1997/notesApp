@@ -17,10 +17,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DisplayNoteActivity" />
+
         <activity
-            android:name=".EditActivity"
-            android:label="New note" />
+            android:name=".DisplayNoteActivity" />
+
+        <activity
+            android:label="New note"
+            android:name=".EditActivity" />
     </application>
 
 </manifest>

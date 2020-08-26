@@ -1,4 +1,4 @@
-package co.edu.udem.ejemplo
+package co.edu.udem.ejemplo.adapters
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import co.edu.udem.ejemplo.EditActivity
+import co.edu.udem.ejemplo.R
 import co.edu.udem.ejemplo.model.MyDatabase
 import co.edu.udem.ejemplo.model.Note
 import co.edu.udem.ejemplo.model.NotesDao

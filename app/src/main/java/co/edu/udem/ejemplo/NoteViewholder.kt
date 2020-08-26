@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import co.edu.udem.ejemplo.adapters.NotesAdapter
 import co.edu.udem.ejemplo.model.Note
 
 class NoteViewholder(itemView: View) : RecyclerView.ViewHolder(itemView), BindViewHolder {

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import co.edu.udem.ejemplo.adapters.NotesAdapter
 import co.edu.udem.ejemplo.model.MyDatabase
 import co.edu.udem.ejemplo.model.Note
 import co.edu.udem.ejemplo.model.NotesDao

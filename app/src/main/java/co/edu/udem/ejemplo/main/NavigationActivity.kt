@@ -1,10 +1,12 @@
-package co.edu.udem.ejemplo
+package co.edu.udem.ejemplo.main
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import co.edu.udem.ejemplo.R
+import co.edu.udem.ejemplo.edit.EditActivity
 import kotlinx.android.synthetic.main.activity_navigation.*
 
 class NavigationActivity : AppCompatActivity() {
@@ -13,7 +15,6 @@ class NavigationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigation)
         setupNavigation()
-
         fabBtn.setOnClickListener { createNote() }
     }
 

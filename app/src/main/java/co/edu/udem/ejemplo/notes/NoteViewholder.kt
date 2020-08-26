@@ -1,10 +1,11 @@
-package co.edu.udem.ejemplo
+package co.edu.udem.ejemplo.notes
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import co.edu.udem.ejemplo.R
 import co.edu.udem.ejemplo.adapters.NotesAdapter
 import co.edu.udem.ejemplo.model.Note
 
@@ -23,8 +24,8 @@ class NoteViewholder(itemView: View) : RecyclerView.ViewHolder(itemView), BindVi
 
     private fun setupView(note: Note, listener: NotesAdapter.OnNoteSelected) {
         tvNote.text = note.title
-        val date = note.date
-        tvDate.text = "Created on $date"
+        if (note.date?.isNotEmpty()!!)
+            tvDate.text = "Created on ${note.date}"
         tvDescription.text = note.description
         itemView.setOnClickListener { listener.onNoteSelected(note) }
         tvReminderDate.visibility = View.GONE

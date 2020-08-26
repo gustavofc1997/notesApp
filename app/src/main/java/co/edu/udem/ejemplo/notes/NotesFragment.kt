@@ -1,4 +1,4 @@
-package co.edu.udem.ejemplo
+package co.edu.udem.ejemplo.notes
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,19 +8,23 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import co.edu.udem.ejemplo.R
 import co.edu.udem.ejemplo.adapters.NotesAdapter
+import co.edu.udem.ejemplo.edit.EditActivity
 import co.edu.udem.ejemplo.model.MyDatabase
 import co.edu.udem.ejemplo.model.Note
 import co.edu.udem.ejemplo.model.NotesDao
 import kotlinx.android.synthetic.main.fragment_notes.*
 import kotlinx.coroutines.*
+import org.koin.android.viewmodel.ext.android.viewModel
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-class RemindersFragment : Fragment(), NotesAdapter.OnNoteSelected {
+class NotesFragment : Fragment(), NotesAdapter.OnNoteSelected {
 
     private lateinit var adapter: NotesAdapter
     private lateinit var notesDao: NotesDao
+    private val viewModel by viewModel<NotesViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +40,6 @@ class RemindersFragment : Fragment(), NotesAdapter.OnNoteSelected {
 
         val database = MyDatabase.getInstance(requireContext())
         notesDao = database.notesDao()
-
         GlobalScope.launch {
             observeDb()
         }
@@ -44,12 +47,10 @@ class RemindersFragment : Fragment(), NotesAdapter.OnNoteSelected {
     }
 
     private suspend fun observeDb() = withContext(Dispatchers.Main) {
-        notesDao.getNotes(status = true).observe(viewLifecycleOwner,
+        viewModel.getLocalNotes(false).observe(viewLifecycleOwner,
             Observer<List<Note>> { notes ->
                 val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-                val filtered = notes.filter {
-                    it.reminder
-                }.sortedBy {
+                val filtered = notes.sortedBy {
                     LocalDate.parse(it.reminderDate, dateTimeFormatter)
                 }
                 CoroutineScope(Dispatchers.Main).launch {
@@ -58,16 +59,14 @@ class RemindersFragment : Fragment(), NotesAdapter.OnNoteSelected {
             })
     }
 
-
     private fun showNotes(notes: List<Note>) {
         adapter.setNotes(notes)
         if (notes.isEmpty()) {
             tvEmpty.visibility = View.VISIBLE
-        }else{
+        } else {
             tvEmpty.visibility = View.GONE
         }
     }
-
 
     override fun onNoteSelected(note: Note) {
         note.mId?.let { id ->
@@ -75,4 +74,5 @@ class RemindersFragment : Fragment(), NotesAdapter.OnNoteSelected {
             startActivity(intent)
         }
     }
+
 }

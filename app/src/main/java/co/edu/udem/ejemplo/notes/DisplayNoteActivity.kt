@@ -1,10 +1,12 @@
-package co.edu.udem.ejemplo
+package co.edu.udem.ejemplo.notes
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import co.edu.udem.ejemplo.R
 import kotlinx.android.synthetic.main.activity_display_note.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class DisplayNoteActivity : AppCompatActivity() {
 

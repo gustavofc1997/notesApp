@@ -5,7 +5,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "notes")
-class Note {
+class Note (){
+    constructor(newTitle: String) : this() {
+        this.title =newTitle
+    }
 
     @PrimaryKey
     @ColumnInfo(name = "_id")

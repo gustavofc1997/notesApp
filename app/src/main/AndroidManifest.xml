@@ -2,15 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="co.edu.udem.ejemplo">
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".Application"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
 
-        <activity android:name=".NavigationActivity">
+        <activity android:name=".main.NavigationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,12 +20,11 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".DisplayNoteActivity" />
+        <activity android:name=".notes.DisplayNoteActivity" />
 
         <activity
-            android:label="New note"
-            android:name=".EditActivity" />
+            android:name=".edit.EditActivity"
+            android:label="New note" />
     </application>
 
 </manifest>

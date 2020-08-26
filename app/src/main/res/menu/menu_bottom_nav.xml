@@ -5,9 +5,12 @@
         android:id="@id/notesFragment"
         android:icon="@drawable/ic_notes"
         android:title="@string/tab_notes" />
-
     <item
         android:id="@id/remindersFragment"
         android:icon="@drawable/ic_reminder"
         android:title="@string/tab_reminders" />
+    <item
+        android:id="@id/remoteFragment"
+        android:icon="@drawable/ic_reminder"
+        android:title="@string/remotes_title" />
 </menu>

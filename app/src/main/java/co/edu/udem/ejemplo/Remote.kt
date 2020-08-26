@@ -1,25 +1,26 @@
-package co.edu.udem.ejemplo.adapters
+package co.edu.udem.ejemplo
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import co.edu.udem.ejemplo.EditActivity
-import co.edu.udem.ejemplo.R
-import co.edu.udem.ejemplo.model.MyDatabase
+import co.edu.udem.ejemplo.adapters.NotesAdapter
+import co.edu.udem.ejemplo.edit.EditActivity
 import co.edu.udem.ejemplo.model.Note
-import co.edu.udem.ejemplo.model.NotesDao
+import co.edu.udem.ejemplo.notes.NotesViewModel
 import kotlinx.android.synthetic.main.fragment_notes.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.koin.android.viewmodel.ext.android.viewModel
 
-class NotesFragment : Fragment(), NotesAdapter.OnNoteSelected {
-
+class Remote : Fragment(), NotesAdapter.OnNoteSelected {
     private lateinit var adapter: NotesAdapter
-    private lateinit var notesDao: NotesDao
+    private val viewModel by viewModel<NotesViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,8 +34,6 @@ class NotesFragment : Fragment(), NotesAdapter.OnNoteSelected {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        val database = MyDatabase.getInstance(requireContext())
-        notesDao = database.notesDao()
         GlobalScope.launch {
             observeDb()
         }
@@ -42,22 +41,23 @@ class NotesFragment : Fragment(), NotesAdapter.OnNoteSelected {
     }
 
     private suspend fun observeDb() = withContext(Dispatchers.Main) {
-        notesDao.getNotes(status = false).observe(viewLifecycleOwner,
-            Observer<List<Note>> { notes -> // update the UI here
-                CoroutineScope(Dispatchers.Main).launch {
-                    showNotes(notes)
-                }
-            })
+        showNotes(viewModel.getRemotes())
     }
+
 
     private fun showNotes(notes: List<Note>) {
         adapter.setNotes(notes)
         if (notes.isEmpty()) {
-            tvEmpty.visibility = View.VISIBLE
-        }else{
-            tvEmpty.visibility = View.GONE
+            tvEmpty?.let {
+                it.visibility = View.GONE
+            }
+        } else {
+            tvEmpty?.let {
+                it.visibility = View.GONE
+            }
         }
     }
+
 
     override fun onNoteSelected(note: Note) {
         note.mId?.let { id ->
@@ -65,5 +65,4 @@ class NotesFragment : Fragment(), NotesAdapter.OnNoteSelected {
             startActivity(intent)
         }
     }
-
 }

@@ -1,4 +1,4 @@
-package co.edu.udem.ejemplo
+package co.edu.udem.ejemplo.edit
 
 import android.app.DatePickerDialog
 import android.content.Context
@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import co.edu.udem.ejemplo.R
 import co.edu.udem.ejemplo.model.MyDatabase
 import co.edu.udem.ejemplo.model.Note
 import co.edu.udem.ejemplo.model.NotesDao
@@ -69,7 +70,7 @@ class EditActivity : AppCompatActivity() {
         note.description = etDescription.text.toString()
         note.reminder = sw_reminder.isChecked
         val currentDateTime = LocalDateTime.now()
-        note.date = currentDateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
+        note.date = currentDateTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
         if (sw_reminder.isChecked)
             note.reminderDate = etDate.text.toString()
     }

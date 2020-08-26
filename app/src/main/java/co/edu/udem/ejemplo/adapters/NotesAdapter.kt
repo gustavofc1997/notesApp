@@ -2,8 +2,8 @@ package co.edu.udem.ejemplo.adapters
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import co.edu.udem.ejemplo.BindViewHolder
-import co.edu.udem.ejemplo.NoteViewholder
+import co.edu.udem.ejemplo.notes.BindViewHolder
+import co.edu.udem.ejemplo.notes.NoteViewholder
 import co.edu.udem.ejemplo.model.Note
 
 class NotesAdapter(

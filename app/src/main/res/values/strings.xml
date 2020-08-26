@@ -8,4 +8,7 @@
     <string name="hint_description">Description</string>
     <string name="reminder_label">is reminder?</string>
     <string name="reminder_date">Fecha de recordatorio</string>
+    <string name="remotes_title">Remotas</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

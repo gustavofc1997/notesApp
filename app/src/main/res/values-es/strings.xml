@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <string name="app_name">Mis notas</string>
     <string name="send_note">Enviar</string>
-    <string name="type_message">Escribe el mensaje</string>
+    <string name="type_message">Enter a message</string>
     <string name="save">Guardar</string>
-
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tab_notes">Notas</string>
+    <string name="tab_reminders">Recodatorios</string>
+    <string name="title_notes">Tus notas</string>
+    <string name="title_hint">Titulo</string>
+    <string name="hint_description">Descripcion</string>
+    <string name="reminder_label">Es un recordatorio?</string>
+    <string name="reminder_date">Fecha de recordatorio</string>
 </resources>

@@ -1,45 +1,31 @@
 package co.edu.udem.ejemplo
 
-import android.content.Context
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import co.edu.udem.ejemplo.model.Note
 
-class NotesAdapter (
-    context: Context, val listener:OnNoteSelected
-) : RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
+class NotesAdapter(
+    private val listener: OnNoteSelected
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-   private val inflater: LayoutInflater = LayoutInflater.from(context)
-   private var notes = emptyList<Note>() // Cached copy of notes
+    private var notes = emptyList<Note>()
 
-   override fun getItemCount() = notes.size
+    override fun getItemCount() = notes.size
 
-   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
-       val itemView = inflater.inflate(R.layout.note_row, parent, false)
-       return NoteViewHolder(itemView)
-   }
+    fun setNotes(notes: List<Note>) {
+        this.notes = notes
+        notifyDataSetChanged()
+    }
 
-   override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
-       val current = notes[position]
-       holder.noteItemView.text = current.title
+    interface OnNoteSelected {
+        fun onNoteSelected(note: Note)
+    }
 
-       holder.noteItemView.setOnClickListener(View.OnClickListener {
-               view -> listener.onNoteSelected(current) })
-   }
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        (holder as BindViewHolder).bind(notes[position], listener)
+    }
 
-   fun setNotes(notes: List<Note>) {
-       this.notes = notes
-       notifyDataSetChanged()
-   }
-
-   inner class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-       val noteItemView: TextView = itemView.findViewById(R.id.textView)
-   }
-
-    interface OnNoteSelected{
-        fun onNoteSelected(noteId:Note)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return NoteViewholder(parent)
     }
 }

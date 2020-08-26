@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Notas"
-        android:icon="@drawable/ic_launcher_foreground"
+    <item
         android:id="@id/notesFragment"
-        />
+        android:icon="@drawable/ic_notes"
+        android:title="@string/tab_notes" />
 
-    <item android:title="Recordatorios"
-        android:icon="@drawable/ic_launcher_foreground"
-        android:id="@id/remindersFragment"/>
-
+    <item
+        android:id="@id/remindersFragment"
+        android:icon="@drawable/ic_reminder"
+        android:title="@string/tab_reminders" />
 </menu>
